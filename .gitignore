@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Manim intermediate render caches & partial files
+**/media/Tex/
+**/media/texts/
+**/partial_movie_files/
+media/Tex/
+media/texts/
+media/videos/**/partial_movie_files/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.directory
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Teamwork Agent State
+.agents/
