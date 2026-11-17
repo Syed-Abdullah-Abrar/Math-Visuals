@@ -9,9 +9,14 @@ Intuitive, first-principles repository combining geometric visualizations, forma
 1. [Repository Structure](#repository-structure)
 2. [Linear Algebra Curriculum](#1-linear-algebra-curriculum)
    - [Sprint 1: Vectors, Linear Combinations & Span](#sprint-1-vectors-linear-combinations--span)
+   - [Sprint 2: Linear Mappings & Matrix Multiplication as Composition](#sprint-2-linear-mappings--matrix-multiplication-as-composition)
+   - [Sprint 3: Column Space, Null Space & Rank-Nullity Theorem (3D)](#sprint-3-column-space-null-space--rank-nullity-theorem-3d)
+   - [Sprint 4: Change of Basis & Similarity Transformations](#sprint-4-change-of-basis--similarity-transformations)
+   - [Render & Verification Quickstart](#render--verification-quickstart)
    - [Curriculum Roadmap](#curriculum-roadmap)
-3. [Scratchpad & Prototyping](#2-scratchpad--prototyping)
-4. [Foundational Philosophy & Blueprint](#3-foundational-philosophy--blueprint)
+3. [Master Study Guide: How to Study Sprints 1–4](#2-master-study-guide-how-to-study-sprints-14)
+4. [Scratchpad & Prototyping](#3-scratchpad--prototyping)
+5. [Foundational Philosophy & Blueprint](#4-foundational-philosophy--blueprint)
    - [Part 1: The Core Philosophy (The Unified Field)](#part-1-the-core-philosophy-the-unified-field)
    - [Part 2: The Geometric Translation of Technical Landscapes](#part-2-the-geometric-translation-of-technical-landscapes)
    - [Part 3: The Focus Matrix (Prioritizing via Cognitive Constraints)](#part-3-the-focus-matrix-prioritizing-via-cognitive-constraints)
@@ -24,106 +29,195 @@ Intuitive, first-principles repository combining geometric visualizations, forma
 
 ```
 math_cs/
-├── README.md                     # Master blueprint, table of contents, and curriculum roadmap
-├── .gitignore                    # Python, virtualenv, and Manim cache rules
-├── linear_algebra/               # Geometric linear algebra curriculum
-│   ├── README.md                 # Curriculum module index & sprint roadmap
-│   └── sprint_01_vectors_span/   # Sprint 1: Vectors, Linear Combinations & Span
-│       ├── README.md             # Master companion guide (protocol integration)
-│       ├── brief.md              # Part 1: Geometric Consensus Brief
-│       ├── storyboard.md         # Part 2: 4-Act Visual Storyboard
-│       ├── scene_vectors_span.py # Part 3: Production ManimCE script
-│       └── tweaks_prompts.md     # Part 4: Interactive Tweaks & Intuition Prompts
-├── tests/                        # Automated verification test suite
-│   └── test_sprint01_invariants.py # Invariant & render validation tests
-└── scratchpad_codes/             # Prototyping & numerical verification scripts
-    └── matrix_expansion.py       # Quadratic form expansions (symmetric vs general)
+├── README.md                                  # Master blueprint, study guide, and curriculum index
+├── .gitignore                                 # Python, virtualenv, and Manim cache rules
+├── linear_algebra/                            # 3Blue1Brown-modeled Geometric Linear Algebra curriculum
+│   ├── README.md                              # Curriculum module index & sprint roadmap
+│   ├── sprint_01_vectors_span/                # Sprint 1: Vectors, Linear Combinations & Span
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_vectors_span.py              # Part 3: Production ManimCE script
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   ├── sprint_02_linear_mappings/             # Sprint 2: Linear Mappings & Matrix Composition
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_linear_mappings.py           # Part 3: Production ManimCE script
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   ├── sprint_03_column_null_space/           # Sprint 3: Column Space, Null Space & Rank-Nullity (3D)
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_column_null_space.py         # Part 3: Production 3D ManimCE script (ThreeDScene)
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   └── sprint_04_change_of_basis/             # Sprint 4: Change of Basis & Similarity (P^-1 A P)
+│       ├── README.md                          # Master companion guide
+│       ├── brief.md                           # Part 1: Geometric Consensus Brief
+│       ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│       ├── scene_change_of_basis.py           # Part 3: Production ManimCE script
+│       └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+├── tests/                                     # 290-test automated invariant & adversarial verification suite
+│   ├── test_sprint01_invariants.py            # Sprint 1 invariant & AST tests
+│   ├── test_adversarial_sprint1.py            # Sprint 1 numerical stress tests
+│   ├── test_sprint02_invariants.py            # Sprint 2 invariant & AST tests
+│   ├── test_adversarial_sprint2.py            # Sprint 2 commutator & composition stress tests
+│   ├── test_sprint03_invariants.py            # Sprint 3 3D subspace & HUD pinning AST tests
+│   ├── test_adversarial_sprint3.py            # Sprint 3 rank-nullity & least-norm stress tests
+│   ├── test_sprint04_invariants.py            # Sprint 4 similarity & eigen-basis invariant tests
+│   └── test_adversarial_sprint4.py            # Sprint 4 Jordan block & conditioning stress tests
+└── scratchpad_codes/                          # Prototyping & numerical verification scripts
+    └── matrix_expansion.py                    # Quadratic form expansions (symmetric vs general)
 ```
 
 ---
 
 ## 1. Linear Algebra Curriculum
 
-> **Status**: Active Curriculum  
+> **Status**: Active Curriculum (Sprints 1–4 Completed & Certified)  
 > **Primary References**:  
-> - *Mathematics for Machine Learning* (MML Ch. 2.4–2.6) — Deisenroth, Faisal, Ong  
-> - *Introduction to Applied Linear Algebra* (VMLS Ch. 1, 5) — Boyd, Vandenberghe  
-> - *Immersive Linear Algebra* (ILA Ch. 1–2, 5, 8) — Ström, Åström, Akenine-Möller  
+> - *Mathematics for Machine Learning* (**MML** Ch. 2.4–2.7, Ch. 3–4, Ch. 10) — Deisenroth, Faisal, Ong (`/home/uni-kernel/brain/03_RESOURCES/Books/AI-ML/Mathematics/Mathematics for Machine Learning.pdf`)  
+> - *Introduction to Applied Linear Algebra* (**VMLS** Ch. 1, 5, 6, 7, 10) — Boyd, Vandenberghe (`/home/uni-kernel/brain/03_RESOURCES/Books/Applied mathematics/Algebra/VMLS.pdf`)  
+> - *Immersive Linear Algebra* (**ILA** Ch. 1–2, 6) — Ström, Åström, Akenine-Möller (`https://immersivemath.com/ila/tableofcontents.html`)  
+> - *Advanced Engineering Mathematics* (**Kreyszig** 10th Ed. Ch. 7–8) & *Higher Engineering Mathematics* (**B.S. Grewal** Ch. 2) (`/home/uni-kernel/brain/03_RESOURCES/Books/`)
 
-Linear algebra operates through spatial transformations. We treat matrices not as numeric tables, but as continuous coordinate deformations that stretch, rotate, and shear space while keeping the origin fixed.
+Linear algebra operates through spatial transformations. We treat matrices not as static tables of numbers, but as continuous coordinate deformations that stretch, rotate, shear, or project space while keeping the origin fixed. Every sprint follows a strict **4-Part Output Protocol**:
+1. **Part 1 (`brief.md`)**: ~350-word 3Blue1Brown Geometric Consensus Brief across four lenses (Geometric Action, Geometric Invariant, Algebraic-to-Visual Dictionary, and Dual Bridge to Frontier ML + GATE CS/DA).
+2. **Part 2 (`storyboard.md`)**: 60–120s 4-Act Visual Storyboard (`Act 1: Concrete Spatial Puzzle` $\to$ `Act 2: Dynamic Deformation & Ghost Space` $\to$ `Act 3: Color-Coded Algebraic Morph` $\to$ `Act 4: Degenerate / Edge-Case Stress Test`).
+3. **Part 3 (`scene_*.py`)**: Production ManimCE v0.18+ Python script enforcing the 8 coding rules (3b1b color palette, zero text overlap via `make_hud_panel`, `ValueTracker` updaters, exact `numpy.linalg` arithmetic).
+4. **Part 4 (`tweaks_prompts.md`)**: Interactive parameter modifications and 4 intuition stress-test prompts with executable NumPy verification scripts.
+
+---
 
 ### Sprint 1: Vectors, Linear Combinations & Span
+- **Location**: [`linear_algebra/sprint_01_vectors_span/`](linear_algebra/sprint_01_vectors_span/) ([`README.md`](linear_algebra/sprint_01_vectors_span/README.md), [`brief.md`](linear_algebra/sprint_01_vectors_span/brief.md), [`storyboard.md`](linear_algebra/sprint_01_vectors_span/storyboard.md), [`scene_vectors_span.py`](linear_algebra/sprint_01_vectors_span/scene_vectors_span.py), [`tweaks_prompts.md`](linear_algebra/sprint_01_vectors_span/tweaks_prompts.md))
+- **References**: MML §2.4 | ILA Ch. 1–2 | VMLS Ch. 1, 5
+- **Geometric Core**:
+  - Reaching target vector $\mathbf{b} = [3, 4]^\top$ via basis vectors $\mathbf{v}_1 = [2, 1]^\top$ and $\mathbf{v}_2 = [-1, 2]^\top$.
+  - Sweeping scalars $c_1, c_2 \in [-2.5, 2.5]$ to tile the 2D plane into an oblique parallelogram grid.
+  - Degenerate stress test: Rotating $\mathbf{v}_2$ into collinearity with $\mathbf{v}_1$ collapses the 2D span sheet into a 1D line ($\det = 0, \text{rank} = 1$).
+  - **ML / GATE Bridge**: Transformer self-attention values $\sum \alpha_i \mathbf{v}_i$ as convex hull combinations inside $\text{span}(\{\mathbf{v}_i\})$; Rouché–Capelli consistency ($A\mathbf{x}=\mathbf{b} \iff \text{rank}(A) = \text{rank}([A \mid \mathbf{b}])$).
 
-Sprint 1 establishes the atomic generating mechanism of linear spaces in [`linear_algebra/sprint_01_vectors_span/`](linear_algebra/sprint_01_vectors_span/). Every sprint follows a strict 4-part deliverable protocol:
+---
 
-1. **Part 1: Geometric Consensus Brief** ([`brief.md`](linear_algebra/sprint_01_vectors_span/brief.md))  
-   Synthesizes the core physical mechanics:
-   - **Geometric Action**: Spatial vector addition as displacement concatenation (parallelogram law), continuous scalar scaling dials, and oblique mesh generation.
-   - **Geometric Invariant**: Strict origin anchoring ($\mathbf{0} \in \text{span}(S)$), minimal subspace containment, and dimension collapse under collinearity.
-   - **Algebraic-to-Visual Dictionary**: Direct mapping from scalar multipliers, vector sums, and spans to visual sliders, arrows, and translucent planar sheets.
-   - **Dual Bridge**: Links theory to Transformer self-attention (attention outputs as explicit convex combinations $\sum \alpha_i \mathbf{v}_i$) and GATE CS/DA linear system consistency ($A\mathbf{x} = \mathbf{b} \iff \mathbf{b} \in \text{col}(A)$).
+### Sprint 2: Linear Mappings & Matrix Multiplication as Composition
+- **Location**: [`linear_algebra/sprint_02_linear_mappings/`](linear_algebra/sprint_02_linear_mappings/) ([`README.md`](linear_algebra/sprint_02_linear_mappings/README.md), [`brief.md`](linear_algebra/sprint_02_linear_mappings/brief.md), [`storyboard.md`](linear_algebra/sprint_02_linear_mappings/storyboard.md), [`scene_linear_mappings.py`](linear_algebra/sprint_02_linear_mappings/scene_linear_mappings.py), [`tweaks_prompts.md`](linear_algebra/sprint_02_linear_mappings/tweaks_prompts.md))
+- **References**: MML §2.5, §2.7 | ILA Ch. 6 | VMLS Ch. 6–7, 10
+- **Geometric Core**:
+  - Why linearity ($T(c\mathbf{u} + d\mathbf{v}) = cT(\mathbf{u}) + dT(\mathbf{v})$) forces grid lines to remain **parallel and evenly spaced** with $\mathbf{0}$ fixed.
+  - Basis tracking: Columns of $A$ are the physical landing coordinates of $\hat{\imath} \to \mathbf{a}_1 = [2, 1]^\top$ and $\hat{\jmath} \to \mathbf{a}_2 = [0, 2]^\top$.
+  - Matrix multiplication $BA$ as right-to-left sequential spatial composition ($A$ warps space first, then $B$ acts on the deformed space).
+  - Non-commutativity proof ($SR \neq RS$): Contrasting horizontal shear $S = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}$ and $90^\circ$ rotation $R = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}$ on probe $\mathbf{x} = [2, 3]^\top$, visualizing the commutator gap $\|\Delta\| = \sqrt{13}$.
+  - **ML / GATE Bridge**: Deep neural network layer collapse without non-linear activations ($W_L \cdots W_1 = W_{\text{eff}}$); multiplicative determinant $\det(BA) = \det(B)\det(A)$ and cyclic trace invariance $\text{Tr}(SR - RS) = 0$.
 
-2. **Part 2: 4-Act Visual Storyboard** ([`storyboard.md`](linear_algebra/sprint_01_vectors_span/storyboard.md))  
-   Defines frame-by-frame spatial choreography:
-   - **Act 1: Concrete Spatial Puzzle**: Reaching target vector $\mathbf{b} = [3, 4]^\top$ via basis vectors $\mathbf{v}_1 = [2, 1]^\top$ and $\mathbf{v}_2 = [-1, 2]^\top$.
-   - **Act 2: Dynamic Deformation & Ghost Space**: Sliders sweep $c_1, c_2 \in [-2.5, 2.5]$, tiling the 2D Cartesian plane into an oblique mesh.
-   - **Act 3: Color-Coded Algebraic Morph**: Formula $\mathbf{v} = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2$ morphs into arrows, set-builder notation, and a continuous translucent 2D span sheet.
-   - **Act 4: Degenerate Stress Test**: Rotating $\mathbf{v}_2$ into collinearity with $\mathbf{v}_1$ collapses the 2D plane into a 1D line ($\det = 0, \text{rank} = 1$); reducing to $\mathbf{0}$ collapses the span to a 0D point.
+---
 
-3. **Part 3: Production ManimCE Code** ([`scene_vectors_span.py`](linear_algebra/sprint_01_vectors_span/scene_vectors_span.py))  
-   Production animation script written for Manim Community Edition v0.18+ (verified on v0.21.0):
-   - Adheres to the 3Blue1Brown semantic color palette (`#83C167` for $\mathbf{v}_1$, `#FC6255` for $\mathbf{v}_2$, `#58C4DD` for $\mathbf{b}$, `#9A72AC` for subspaces).
-   - Real-time HUD telemetry panels showing coordinates, coefficients, determinant, and subspace rank.
-   - Dynamic parameter choreography via `ValueTracker` and `always_redraw`.
-   - Exact numerical calculations via NumPy.
+### Sprint 3: Column Space, Null Space & Rank-Nullity Theorem (3D)
+- **Location**: [`linear_algebra/sprint_03_column_null_space/`](linear_algebra/sprint_03_column_null_space/) ([`README.md`](linear_algebra/sprint_03_column_null_space/README.md), [`brief.md`](linear_algebra/sprint_03_column_null_space/brief.md), [`storyboard.md`](linear_algebra/sprint_03_column_null_space/storyboard.md), [`scene_column_null_space.py`](linear_algebra/sprint_03_column_null_space/scene_column_null_space.py), [`tweaks_prompts.md`](linear_algebra/sprint_03_column_null_space/tweaks_prompts.md))
+- **References**: MML §2.5–2.7 | Kreyszig §7.3–7.5 | B.S. Grewal Ch. 2 | VMLS Ch. 10
+- **Geometric Core**:
+  - Full `ThreeDScene` animation of rank-2 matrix $A = \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 1 & 1 & 2 \end{bmatrix}$ crushing 3D space onto a 2D planar sheet $\mathcal{C}(A) = \{x + y - z = 0\}$ ($\text{rank}(A) = 2$).
+  - Null space $\mathcal{N}(A) = \text{span}([1, 1, -1]^\top)$ ($\text{nullity}(A) = 1$) marching straight into the origin $\mathbf{0}$, visually locking in $\text{rank}(A) + \text{nullity}(A) = 2 + 1 = 3$.
+  - Complete solution fibers to $A\mathbf{x} = \mathbf{b}$ for $\mathbf{b} = [1, 2, 3]^\top$ shown as the translated affine line $\mathbf{x}_p + \mathcal{N}(A)$ collapsing to the single point $\mathbf{b}$, with the minimum-norm solution $\mathbf{x}_{\text{LN}} = A^+\mathbf{b} \perp \mathcal{N}(A)$.
+  - **ML / GATE Bridge**: LoRA low-rank weight updates $\Delta W = BA$ constraining parameter updates to a low-dimensional column subspace; overparameterized null-space loss fibers and GATE rank-nullity / Rouché–Capelli shortcuts.
 
-4. **Part 4: Interactive Tweaks & Intuition Prompts** ([`tweaks_prompts.md`](linear_algebra/sprint_01_vectors_span/tweaks_prompts.md))  
-   Interactive parameter modification guide and 4 conceptual stress-test challenges probing affine flats, negative cones, softmax temperatures, and null space dimensionality.
+---
 
-Master companion guide and integration instructions are located in [`linear_algebra/sprint_01_vectors_span/README.md`](linear_algebra/sprint_01_vectors_span/README.md).
+### Sprint 4: Change of Basis & Similarity Transformations
+- **Location**: [`linear_algebra/sprint_04_change_of_basis/`](linear_algebra/sprint_04_change_of_basis/) ([`README.md`](linear_algebra/sprint_04_change_of_basis/README.md), [`brief.md`](linear_algebra/sprint_04_change_of_basis/brief.md), [`storyboard.md`](linear_algebra/sprint_04_change_of_basis/storyboard.md), [`scene_change_of_basis.py`](linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py), [`tweaks_prompts.md`](linear_algebra/sprint_04_change_of_basis/tweaks_prompts.md))
+- **References**: MML §2.7.2 | ILA Ch. 6 | VMLS Ch. 6, 10 | Kreyszig Ch. 8
+- **Geometric Core**:
+  - Overlaying the standard Cartesian grid with the tilted eigen-grid $P = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}$ for symmetric transformation $A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$.
+  - Animating the 3-step similarity factorization $A = PDP^{-1}$ on $\mathbf{x} = [2, 0]^\top$: (1) $P^{-1}$ translates into eigen-coordinates $[1, -1]_B^\top$, (2) $D = \text{diag}(3, 1)$ scales purely along the eigen-axes, and (3) $P$ translates back to standard coordinates $[4, 2]^\top$.
+  - Defective edge-case stress test: Jordan shear block $M_{\text{def}} = \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}$ where algebraic multiplicity ($2$) exceeds geometric multiplicity ($1$), collapsing the eigen-grid into a 1D line ($\det(P) = 0$).
+  - **ML / GATE Bridge**: PCA covariance diagonalization $\Sigma = Q\Lambda Q^\top$ decorrelating features into orthogonal eigen-coordinates; GATE similarity invariants ($\text{Tr}(P^{-1}AP) = \text{Tr}(A)$, $\det(P^{-1}AP) = \det(A)$, $A^k = PD^kP^{-1}$).
 
-#### Render & Verification Quickstart
+---
+
+### Render & Verification Quickstart
 
 ```bash
 # Activate project virtual environment
 source .venv/bin/activate
 
-# Render Sprint 1 Full Master Narrative (preview quality, 480p15)
-manim -ql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py VectorSpanScene
+# Run full 290-test invariant & adversarial suite across Sprints 1–4
+pytest tests/ -v
 
-# Render individual acts
-manim -ql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py Act1SpatialPuzzle
-manim -ql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py Act2DynamicDeformation
-manim -ql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py Act3AlgebraicMorph
-manim -ql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py Act4DegenerateStressTest
+# Fast Preview Renders (480p15) — Master Combined Scenes
+manim -pql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py VectorSpanScene
+manim -pql linear_algebra/sprint_02_linear_mappings/scene_linear_mappings.py LinearMappingsScene
+manim -pql linear_algebra/sprint_03_column_null_space/scene_column_null_space.py ColumnNullSpaceScene
+manim -pql linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py ChangeOfBasisScene
 
-# Execute automated invariant test suite
-python -m pytest tests/test_sprint01_invariants.py
+# Production High-Definition Renders (1080p60)
+manim -pqh linear_algebra/sprint_01_vectors_span/scene_vectors_span.py VectorSpanScene
+manim -pqh linear_algebra/sprint_02_linear_mappings/scene_linear_mappings.py LinearMappingsScene
+manim -pqh linear_algebra/sprint_03_column_null_space/scene_column_null_space.py ColumnNullSpaceScene
+manim -pqh linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py ChangeOfBasisScene
 ```
+
+---
 
 ### Curriculum Roadmap
 
 | Sprint | Topic | Geometric Focus | References | Status |
 |---|---|---|---|---|
-| **01** | **Vectors, Linear Combinations & Span** | Oblique grid tiling, displacement concatenation, collinear collapse | MML §2.4–2.6, VMLS Ch. 1, 5, ILA Ch. 1–2 | **Active** |
-| **02** | **Linear Transformations & Matrix Action** | Grid deformation, origin preservation, basis vectors as column destinations | MML §2.7, VMLS Ch. 5, 7, ILA Ch. 3–4 | Planned |
-| **03** | **Determinants & Orientation Scaling** | Signed area/volume expansion factors, orientation reversal, null-space collapse | MML §4.1, VMLS Ch. 5, ILA Ch. 6 | Planned |
-| **04** | **Systems of Linear Equations** | Intersecting hyperplanes, column span inclusion ($Ax = b$), Rouché-Capelli rank test | MML §2.3, VMLS Ch. 8, ILA Ch. 5 | Planned |
-| **05** | **Vector Subspaces & Fundamental Theorem** | Four fundamental subspaces ($\text{Col}, \text{Null}, \text{Row}, \text{Left Null}$), rank-nullity theorem | MML §2.4, Strang FTLA | Planned |
-| **06** | **Orthogonality & Projections** | Orthogonal complements, Gram-Schmidt orthogonalization, least squares projection | MML §3.1–3.4, VMLS Ch. 5, 12, ILA Ch. 7 | Planned |
-| **07** | **Spectral Theory (Eigenvalues & Eigenvectors)** | Invariant axes of transformation, characteristic equation, spectral decomposition | MML §4.2–4.4, ILA Ch. 8 | Planned |
-| **08** | **Singular Value Decomposition (SVD)** | Rotation-scaling-rotation hyper-ellipse factorization, low-rank approximation | MML §4.5, VMLS Ch. 18 | Planned |
+| **01** | **Vectors, Linear Combinations & Span** | Oblique grid tiling, displacement concatenation, collinear collapse | MML §2.4, VMLS Ch. 1, 5, ILA Ch. 1–2 | **Completed** |
+| **02** | **Linear Mappings & Matrix Composition** | Parallel grid invariance, basis columns, $BA \neq AB$ via rotation + shear | MML §2.5, §2.7, VMLS Ch. 6–7, 10, ILA Ch. 6 | **Completed** |
+| **03** | **Column Space, Null Space & Rank-Nullity** | 3D rank-2 collapse onto 2D plane, 1D null line to $\mathbf{0}$, $\mathbf{x}_p + \mathcal{N}(A)$ | MML §2.5–2.7, Kreyszig §7.3–7.5, Grewal Ch. 2 | **Completed** |
+| **04** | **Change of Basis & Similarity ($P^{-1}AP$)** | Standard vs. eigen-grid overlay, $P^{-1} \to D \to P$, defective Jordan collapse | MML §2.7.2, ILA Ch. 6, Kreyszig Ch. 8 | **Completed** |
+| **05** | **Orthogonal Projections & Least Squares** | Orthogonal complements, Gram-Schmidt, normal equations $A^\top(y - A\hat{x}) = 0$ | MML §3.1–3.8, VMLS Ch. 5, 12, ILA Ch. 7 | Planned |
+| **06** | **Determinants & Signed Volume Scaling** | Oriented volume expansion, multilinear alternating forms, orientation reversal | MML §4.1, VMLS Ch. 5, ILA Ch. 6 | Planned |
+| **07** | **Spectral Theory & Quadratic Forms** | Symmetric orthogonal eigen-axes $Q\Lambda Q^\top$, Rayleigh quotient, Hessian curvature | MML §4.2–4.4, Kreyszig Ch. 8, ILA Ch. 8 | Planned |
+| **08** | **Singular Value Decomposition (SVD) & PCA** | Rotation-stretch-rotation hyper-ellipsoid $U\Sigma V^\top$, Eckart-Young, PCA | MML §4.5–4.6, Ch. 10, VMLS Ch. 18 | Planned |
 
 ---
 
-## 2. Scratchpad & Prototyping
+## 2. Master Study Guide: How to Study Sprints 1–4
+
+To achieve 90%+ geometric and analytical mastery across GATE CS/DA and Frontier ML, study each sprint using this **5-Phase Active Loop** rather than passively reading textbooks or watching videos:
+
+### Phase 1: Anchor the Spatial Intuition First (15 mins)
+1. **Read `brief.md` before opening any textbook**:
+   - Internalize Lens 1 (*Geometric Action*) and Lens 2 (*Geometric Invariant*). Ask yourself: *"What moves, and what refuses to change?"*
+2. **Render & Watch the 4-Act Animation (`manim -pql`)**:
+   - Watch Act 1 & Act 2 **with your eyes on the ghost grid and basis vectors** ($\hat{\imath}$ green, $\hat{\jmath}$ red, $\hat{k}$ blue).
+   - Pause at Act 3 when the HUD equation appears (`storyboard.md` gives exact timestamps) and map every colored symbol in the `MathTex` card to the corresponding arrow or subspace on screen.
+
+### Phase 2: Targeted Multi-Book Triangulation (35 mins)
+Use the **Canonical Textbook Cross-Reference Matrix** in each sprint's `README.md` to read the exact sections in a deliberate sequence:
+1. **Immersive Linear Algebra (ILA — Interactive Browser)**:
+   - Open `https://immersivemath.com/ila/tableofcontents.html` first. Drag the interactive vector tips in the browser figures to feel the spatial sensitivity before reading formal proofs.
+2. **Boyd & Vandenberghe (`VMLS.pdf`)**:
+   - Read for **applied intuition, block-matrix mechanics, and least-norm/optimization framing** (Ch. 1 & 5 for Sprint 1; Ch. 6, 7, 10 for Sprints 2–3).
+3. **Deisenroth, Faisal & Ong (`Mathematics for Machine Learning.pdf`)**:
+   - Read for **rigorous vector space definitions, basis change commutative diagrams, and ML bridges** (§2.4 for Sprint 1; §2.5–2.6 for Sprint 2–3; §2.7.2 for Sprint 4).
+4. **Kreyszig (Ch. 7–8) & B.S. Grewal (Ch. 2)**:
+   - Read for **theorem statements, rank-nullity edge cases, Cayley-Hamilton shortcuts, and GATE problem archetypes**.
+
+### Phase 3: Break the Code via `tweaks_prompts.md` (25 mins)
+Never treat `scene_*.py` as read-only. Open `tweaks_prompts.md` in the sprint folder:
+1. **Execute the Parameter Tweaks**:
+   - Change the matrices/vectors at the top of `scene_*.py` as instructed (e.g., orientation-reversing negative determinants in Sprint 2, rank-1 collapse in Sprint 3, or complex rotation eigenvalues in Sprint 4).
+   - **Predict on paper** what the grid, basis vectors, and HUD invariants will look like *before* running `manim -pql`.
+2. **Solve the 4 Intuition Stress-Test Prompts**:
+   - Write down your geometric + algebraic answer first, then run the embedded NumPy verification snippet in `tweaks_prompts.md` to check your derivation against exact floating-point output.
+
+### Phase 4: Read the Test Suite as Executable Theorems (15 mins)
+Open `tests/test_sprint0X_invariants.py` and `tests/test_adversarial_sprintX.py`:
+- Every `test_*` function is a **machine-verified mathematical theorem** (e.g., verifying $A\mathbf{x}_p + A\mathbf{v}_{\text{null}} = \mathbf{b}$ across 100,000 vectors, or verifying $\text{Tr}(P^{-1}AP) = \text{Tr}(A)$).
+- Run `pytest tests/test_sprint0X_invariants.py -v` and read how mathematical invariants translate into `np.allclose` assertions.
+
+---
+
+## 3. Scratchpad & Prototyping
 
 Isolated verification scripts for fast algebraic and numerical checks prior to animation implementation:
 - [matrix_expansion.py](scratchpad_codes/matrix_expansion.py): Verifies quadratic forms $(\mathbf{a} - \mathbf{b})^\top \mathbf{M} (\mathbf{a} - \mathbf{b})$ under symmetric and non-symmetric matrices $\mathbf{M}$.
 
 ---
 
-## 3. Foundational Philosophy & Blueprint
+## 4. Foundational Philosophy & Blueprint
 
 To anchor everything into a single, permanent architecture, we synthesize the core philosophy, the geometric translations, the contrarian focus strategies, and the two-year execution plan into one unified blueprint.
 
