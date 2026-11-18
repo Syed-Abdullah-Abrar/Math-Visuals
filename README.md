@@ -12,9 +12,15 @@ Intuitive, first-principles repository combining geometric visualizations, forma
    - [Sprint 2: Linear Mappings & Matrix Multiplication as Composition](#sprint-2-linear-mappings--matrix-multiplication-as-composition)
    - [Sprint 3: Column Space, Null Space & Rank-Nullity Theorem (3D)](#sprint-3-column-space-null-space--rank-nullity-theorem-3d)
    - [Sprint 4: Change of Basis & Similarity Transformations](#sprint-4-change-of-basis--similarity-transformations)
+   - [Sprint 5: Norms ($L_1, L_2, L_\infty$), Inner Products & Cauchy-Schwarz](#sprint-5-norms-l_1-l_2-l_infty-inner-products--cauchy-schwarz)
+   - [Sprint 6: Orthogonal Projections onto Lines & Subspaces](#sprint-6-orthogonal-projections-onto-1d-lines--k-d-subspaces)
+   - [Sprint 7: Gram-Schmidt Orthonormalization & $QR$ Decomposition](#sprint-7-gram-schmidt-orthonormalization--qr-decomposition)
+   - [Sprint 8: Orthogonal Matrices, Rotations ($SO(n)$) & Givens/Householder](#sprint-8-orthogonal-matrices-rotations-son--givenshouseholder)
+   - [Curated 1080p60 Production Animations](#curated-1080p60-production-animations)
+   - [Key Concepts & Geometric Insights Across Sprints 5–8](#key-concepts--geometric-insights-across-sprints-58)
    - [Render & Verification Quickstart](#render--verification-quickstart)
    - [Curriculum Roadmap](#curriculum-roadmap)
-3. [Master Study Guide: How to Study Sprints 1–4](#2-master-study-guide-how-to-study-sprints-14)
+3. [Master Study Guide: How to Study Sprints 1–8](#2-master-study-guide-how-to-study-sprints-18)
 4. [Scratchpad & Prototyping](#3-scratchpad--prototyping)
 5. [Foundational Philosophy & Blueprint](#4-foundational-philosophy--blueprint)
    - [Part 1: The Core Philosophy (The Unified Field)](#part-1-the-core-philosophy-the-unified-field)
@@ -33,6 +39,7 @@ math_cs/
 ├── .gitignore                                 # Python, virtualenv, and Manim cache rules
 ├── linear_algebra/                            # 3Blue1Brown-modeled Geometric Linear Algebra curriculum
 │   ├── README.md                              # Curriculum module index & sprint roadmap
+│   ├── animations/                            # Curated production 1080p60 MP4 animations (Sprints 1–8)
 │   ├── sprint_01_vectors_span/                # Sprint 1: Vectors, Linear Combinations & Span
 │   │   ├── README.md                          # Master companion guide
 │   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
@@ -51,13 +58,37 @@ math_cs/
 │   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
 │   │   ├── scene_column_null_space.py         # Part 3: Production 3D ManimCE script (ThreeDScene)
 │   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
-│   └── sprint_04_change_of_basis/             # Sprint 4: Change of Basis & Similarity (P^-1 A P)
+│   ├── sprint_04_change_of_basis/             # Sprint 4: Change of Basis & Similarity (P^-1 A P)
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_change_of_basis.py           # Part 3: Production ManimCE script
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   ├── sprint_05_norms_inner_products/        # Sprint 5: Norms (L1, L2, L_inf), Inner Products & Cauchy-Schwarz
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_norms_inner_products.py      # Part 3: Production ManimCE script
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   ├── sprint_06_orthogonal_projections/      # Sprint 6: Orthogonal Projections onto Lines & Subspaces
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_orthogonal_projections.py    # Part 3: Production 3D ManimCE script (ThreeDScene)
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   ├── sprint_07_gram_schmidt_qr/             # Sprint 7: Gram-Schmidt Orthonormalization & QR Decomposition
+│   │   ├── README.md                          # Master companion guide
+│   │   ├── brief.md                           # Part 1: Geometric Consensus Brief
+│   │   ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
+│   │   ├── scene_gram_schmidt_qr.py           # Part 3: Production 3D ManimCE script (ThreeDScene)
+│   │   └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
+│   └── sprint_08_orthogonal_matrices_rotations/# Sprint 8: Orthogonal Matrices, Rotations SO(n) & Givens/Householder
 │       ├── README.md                          # Master companion guide
 │       ├── brief.md                           # Part 1: Geometric Consensus Brief
 │       ├── storyboard.md                      # Part 2: 4-Act Visual Storyboard
-│       ├── scene_change_of_basis.py           # Part 3: Production ManimCE script
+│       ├── scene_orthogonal_matrices_rotations.py # Part 3: Production ManimCE script
 │       └── tweaks_prompts.md                  # Part 4: Interactive Tweaks & Intuition Prompts
-├── tests/                                     # 290-test automated invariant & adversarial verification suite
+├── tests/                                     # 587-test automated invariant & adversarial verification suite
 │   ├── test_sprint01_invariants.py            # Sprint 1 invariant & AST tests
 │   ├── test_adversarial_sprint1.py            # Sprint 1 numerical stress tests
 │   ├── test_sprint02_invariants.py            # Sprint 2 invariant & AST tests
@@ -65,7 +96,15 @@ math_cs/
 │   ├── test_sprint03_invariants.py            # Sprint 3 3D subspace & HUD pinning AST tests
 │   ├── test_adversarial_sprint3.py            # Sprint 3 rank-nullity & least-norm stress tests
 │   ├── test_sprint04_invariants.py            # Sprint 4 similarity & eigen-basis invariant tests
-│   └── test_adversarial_sprint4.py            # Sprint 4 Jordan block & conditioning stress tests
+│   ├── test_adversarial_sprint4.py            # Sprint 4 Jordan block & conditioning stress tests
+│   ├── test_sprint05_invariants.py            # Sprint 5 norm ball convexity & Cauchy-Schwarz tests
+│   ├── test_adversarial_sprint5.py            # Sprint 5 p < 1 quasi-norm & indefinite form stress tests
+│   ├── test_sprint06_invariants.py            # Sprint 6 projection idempotence & normal equations tests
+│   ├── test_adversarial_sprint6.py            # Sprint 6 collinear rank failure & oblique stress tests
+│   ├── test_sprint07_invariants.py            # Sprint 7 QR decomposition & span invariance tests
+│   ├── test_adversarial_sprint7.py            # Sprint 7 CGS vs MGS drift & Lauchli matrix stress tests
+│   ├── test_sprint08_invariants.py            # Sprint 8 isometry & Cartan-Dieudonné theorem tests
+│   └── test_adversarial_sprint8.py            # Sprint 8 3D non-commutativity & Householder sign tests
 └── scratchpad_codes/                          # Prototyping & numerical verification scripts
     └── matrix_expansion.py                    # Quadratic form expansions (symmetric vs general)
 ```
@@ -134,13 +173,83 @@ Linear algebra operates through spatial transformations. We treat matrices not a
 
 ---
 
+### Sprint 5: Norms ($L_1, L_2, L_\infty$), Inner Products & Cauchy-Schwarz
+- **Location**: [`linear_algebra/sprint_05_norms_inner_products/`](linear_algebra/sprint_05_norms_inner_products/) ([`README.md`](linear_algebra/sprint_05_norms_inner_products/README.md), [`brief.md`](linear_algebra/sprint_05_norms_inner_products/brief.md), [`storyboard.md`](linear_algebra/sprint_05_norms_inner_products/storyboard.md), [`scene_norms_inner_products.py`](linear_algebra/sprint_05_norms_inner_products/scene_norms_inner_products.py), [`tweaks_prompts.md`](linear_algebra/sprint_05_norms_inner_products/tweaks_prompts.md))
+- **References**: MML §3.1–3.3 | ILA Ch. 3 | VMLS Ch. 3–4
+- **Geometric Core**:
+  - Continuous morphing of the unit ball $B_p = \{\mathbf{x} : \|\mathbf{x}\|_p \le 1\}$ from the sharp $L_1$ diamond ($p=1$) to the isotropic $L_2$ Euclidean circle ($p=2$) to the axis-aligned $L_\infty$ square ($p=\infty$).
+  - Why $p < 1$ pinches into a non-convex star, breaking the triangle inequality ($\|\mathbf{e}_1+\mathbf{e}_2\|_{0.5} = 4 > 2$).
+  - Dot product $\mathbf{x}^\top\mathbf{y}$ visualized as dropping a perpendicular shadow of $\mathbf{x}$ onto $\mathbf{y}$'s unit ruler and multiplying by $\|\mathbf{y}\|_2$.
+  - Cauchy-Schwarz $|\mathbf{x}^\top\mathbf{y}| \le \|\mathbf{x}\|_2\|\mathbf{y}\|_2$ as the geometric shadow trapped inside the vector radius circle.
+  - SPD inner products $\mathbf{x}^\top A\mathbf{y}$ warping circular unit balls into tilted ellipsoids via Cholesky factor $L$ ($A = LL^\top$).
+  - **ML / GATE Bridge**: Softmax saturation avoidance via $1/\sqrt{d_k}$ attention scaling; $L_1$ lasso coordinate-axis sparsity vs $L_2$ ridge shrinkage; RMSNorm activation spheres; Sylvester's principal minors criterion.
+
+---
+
+### Sprint 6: Orthogonal Projections onto 1D Lines & $k$-D Subspaces
+- **Location**: [`linear_algebra/sprint_06_orthogonal_projections/`](linear_algebra/sprint_06_orthogonal_projections/) ([`README.md`](linear_algebra/sprint_06_orthogonal_projections/README.md), [`brief.md`](linear_algebra/sprint_06_orthogonal_projections/brief.md), [`storyboard.md`](linear_algebra/sprint_06_orthogonal_projections/storyboard.md), [`scene_orthogonal_projections.py`](linear_algebra/sprint_06_orthogonal_projections/scene_orthogonal_projections.py), [`tweaks_prompts.md`](linear_algebra/sprint_06_orthogonal_projections/tweaks_prompts.md))
+- **References**: MML §3.8 | ILA Ch. 3, 6 | VMLS Ch. 11–12
+- **Geometric Core**:
+  - 1D line projection $\pi_U(\mathbf{x}) = \frac{\mathbf{b}^\top\mathbf{x}}{\|\mathbf{b}\|^2}\mathbf{b}$ and idempotence $\pi^2 = \pi$.
+  - Sliding a candidate point $\hat{\mathbf{y}} = A\mathbf{x}(s)$ across a 2D plane $U = \mathcal{C}(A)$ in 3D while plotting $\|\mathbf{y} - \hat{\mathbf{y}}\|_2$ in a live pinned 2D corner graph; hitting the global minimum distance at the exact moment $\mathbf{y} - \hat{\mathbf{y}} \perp \mathcal{C}(A)$.
+  - Normal equations derivation $A^\top(\mathbf{y} - A\hat{\mathbf{x}}) = \mathbf{0} \implies P = A(A^\top A)^{-1}A^\top$ and orthogonal complement $I - P$.
+  - Pythagorean decomposition $\|\mathbf{y}\|_2^2 = \|P\mathbf{y}\|_2^2 + \|(I - P)\mathbf{y}\|_2^2$ and spectral invariant $\operatorname{Tr}(P) = \operatorname{rank}(P) = k$.
+  - Degenerate stress tests: affine flat shift $L = \mathbf{x}_0 + U$, collinear feature failure rescued by Ridge ($A^\top A + \lambda I$), and oblique projection error explosion ($\|P_{\text{ob}}\|_2 > 1$).
+  - **ML / GATE Bridge**: Ordinary least squares hat matrix; Ridge regression conditioning; PCA subspace reconstruction; instant rank-1 projector readouts ($P = \mathbf{u}\mathbf{u}^\top / \|\mathbf{u}\|^2 \implies \operatorname{Tr}=1, \operatorname{rank}=1, \det=0$).
+
+---
+
+### Sprint 7: Gram-Schmidt Orthonormalization & $QR$ Decomposition
+- **Location**: [`linear_algebra/sprint_07_gram_schmidt_qr/`](linear_algebra/sprint_07_gram_schmidt_qr/) ([`README.md`](linear_algebra/sprint_07_gram_schmidt_qr/README.md), [`brief.md`](linear_algebra/sprint_07_gram_schmidt_qr/brief.md), [`storyboard.md`](linear_algebra/sprint_07_gram_schmidt_qr/storyboard.md), [`scene_gram_schmidt_qr.py`](linear_algebra/sprint_07_gram_schmidt_qr/scene_gram_schmidt_qr.py), [`tweaks_prompts.md`](linear_algebra/sprint_07_gram_schmidt_qr/tweaks_prompts.md))
+- **References**: MML §3.8.3 | VMLS Ch. 5.4, 10.4, 11.4 | Kreyszig §20.9
+- **Geometric Core**:
+  - Three skewed vectors $\{\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3\}$ forming an oblique 3D parallelepiped, stripped sequentially of their parallel components:
+    $\mathbf{u}_2 = \mathbf{a}_2 - (\mathbf{q}_1^\top\mathbf{a}_2)\mathbf{q}_1$ and $\mathbf{u}_3 = \mathbf{a}_3 - (\mathbf{q}_1^\top\mathbf{a}_3)\mathbf{q}_1 - (\mathbf{q}_2^\top\mathbf{a}_3)\mathbf{q}_2$.
+  - Normalizing each residual onto the unit sphere $S^2$ to produce a rigid orthonormal frame $Q$ ($Q^\top Q = I_3$).
+  - Revealing upper-triangular $R$ as the causal reconstruction coordinates ($R_{ii} = \|\mathbf{u}_i\|_2 > 0$).
+  - Parallelepiped volume conservation: $|\det(A)| = \prod_{i=1}^n R_{ii}$.
+  - Degenerate stress tests: coplanar collapse $\mathbf{a}_3 \in \operatorname{span}(\mathbf{a}_1, \mathbf{a}_2)$ certifying rank deficiency ($R_{33} = 0$), and numerical orthogonality loss of Classical Gram-Schmidt (CGS) vs Modified Gram-Schmidt (MGS) vs Householder $QR$ on ill-conditioned Lauchli matrices.
+  - **ML / GATE Bridge**: Muon optimizer polar factor orthonormalization ($UV^\top$); Haar-uniform orthogonal weight initialization; least-squares back-substitution in $n^2$ flops without matrix inversion.
+
+---
+
+### Sprint 8: Orthogonal Matrices, Rotations ($SO(n)$) & Givens/Householder
+- **Location**: [`linear_algebra/sprint_08_orthogonal_matrices_rotations/`](linear_algebra/sprint_08_orthogonal_matrices_rotations/) ([`README.md`](linear_algebra/sprint_08_orthogonal_matrices_rotations/README.md), [`brief.md`](linear_algebra/sprint_08_orthogonal_matrices_rotations/brief.md), [`storyboard.md`](linear_algebra/sprint_08_orthogonal_matrices_rotations/storyboard.md), [`scene_orthogonal_matrices_rotations.py`](linear_algebra/sprint_08_orthogonal_matrices_rotations/scene_orthogonal_matrices_rotations.py), [`tweaks_prompts.md`](linear_algebra/sprint_08_orthogonal_matrices_rotations/tweaks_prompts.md))
+- **References**: MML §3.9 | ILA Ch. 6 | Kreyszig §8.3
+- **Geometric Core**:
+  - Rigid isometries: transformations preserving vector lengths ($\|Q\mathbf{x}\|_2 = \|\mathbf{x}\|_2$), pairwise distances, and angles ($Q^\top Q = I \iff Q^{-1} = Q^\top$).
+  - Topology of $O(n)$: proper rotations $SO(n)$ ($\det = +1$, preserving handedness) vs improper reflections $O(n)\setminus SO(n)$ ($\det = -1$, reversing handedness) separated by the $\det = 0$ wall.
+  - Cartan–Dieudonné composition: two reflections across lines with angular gap $\Delta\alpha$ yield a pure rotation $2\Delta\alpha$.
+  - 3D non-commutativity: contrasting $R_x R_y \ne R_y R_x$ on 3D reference cubes.
+  - Structured orthogonal elimination: surgical 2D Givens rotations $G(i, j, \theta)$ vs rank-1 Householder reflectors $H = I - 2\mathbf{v}\mathbf{v}^\top / \|\mathbf{v}\|^2$, using the sign rule $\mathbf{v} = \mathbf{x} + \operatorname{sgn}(x_1)\|\mathbf{x}\|\mathbf{e}_1$ to prevent catastrophic IEEE-754 subtraction.
+  - **ML / GATE Bridge**: Rotary Position Embeddings (RoPE) relative displacement invariance; isometric deep neural network signal propagation across 100+ layers without vanishing/exploding gradients; 3D rotation trace identity $\operatorname{Tr}(R) = 1 + 2\cos\theta$.
+
+---
+
+## Curated 1080p60 Production Animations
+
+All production animations are rendered in full high-definition (1080p at 60 fps) and organized in [`linear_algebra/animations/`](linear_algebra/animations/):
+
+| Sprint | Scene Name | Resolution / FPS | Animation File Link |
+|---|---|---|---|
+| **01** | `VectorSpanScene` | 1080p60 (30.0s) | [`linear_algebra/animations/sprint_01_VectorSpanScene_1080p60.mp4`](linear_algebra/animations/sprint_01_VectorSpanScene_1080p60.mp4) |
+| **02** | `LinearMappingsScene` | 1080p60 (38.5s) | [`linear_algebra/animations/sprint_02_LinearMappingsScene_1080p60.mp4`](linear_algebra/animations/sprint_02_LinearMappingsScene_1080p60.mp4) |
+| **03** | `ColumnNullSpaceScene` | 1080p60 (48.0s) | [`linear_algebra/animations/sprint_03_ColumnNullSpaceScene_1080p60.mp4`](linear_algebra/animations/sprint_03_ColumnNullSpaceScene_1080p60.mp4) |
+| **04** | `ChangeOfBasisScene` | 1080p60 (44.5s) | [`linear_algebra/animations/sprint_04_ChangeOfBasisScene_1080p60.mp4`](linear_algebra/animations/sprint_04_ChangeOfBasisScene_1080p60.mp4) |
+| **05** | `NormsInnerProductsScene` | 1080p60 (45.0s) | [`linear_algebra/animations/sprint_05_NormsInnerProductsScene_1080p60.mp4`](linear_algebra/animations/sprint_05_NormsInnerProductsScene_1080p60.mp4) |
+| **06** | `OrthogonalProjectionsScene` | 1080p60 (49.0s) | [`linear_algebra/animations/sprint_06_OrthogonalProjectionsScene_1080p60.mp4`](linear_algebra/animations/sprint_06_OrthogonalProjectionsScene_1080p60.mp4) |
+| **07** | `GramSchmidtQRScene` | 1080p60 (52.0s) | [`linear_algebra/animations/sprint_07_GramSchmidtQRScene_1080p60.mp4`](linear_algebra/animations/sprint_07_GramSchmidtQRScene_1080p60.mp4) |
+| **08** | `OrthogonalRotationsScene` | 1080p60 (46.0s) | [`linear_algebra/animations/sprint_08_OrthogonalRotationsScene_1080p60.mp4`](linear_algebra/animations/sprint_08_OrthogonalRotationsScene_1080p60.mp4) |
+
+---
+
 ### Render & Verification Quickstart
 
 ```bash
 # Activate project virtual environment
 source .venv/bin/activate
 
-# Run full 290-test invariant & adversarial suite across Sprints 1–4
+# Run full 587-test invariant & adversarial suite across Sprints 1–8
 pytest tests/ -v
 
 # Fast Preview Renders (480p15) — Master Combined Scenes
@@ -148,12 +257,20 @@ manim -pql linear_algebra/sprint_01_vectors_span/scene_vectors_span.py VectorSpa
 manim -pql linear_algebra/sprint_02_linear_mappings/scene_linear_mappings.py LinearMappingsScene
 manim -pql linear_algebra/sprint_03_column_null_space/scene_column_null_space.py ColumnNullSpaceScene
 manim -pql linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py ChangeOfBasisScene
+manim -pql linear_algebra/sprint_05_norms_inner_products/scene_norms_inner_products.py NormsInnerProductsScene
+manim -pql linear_algebra/sprint_06_orthogonal_projections/scene_orthogonal_projections.py OrthogonalProjectionsScene
+manim -pql linear_algebra/sprint_07_gram_schmidt_qr/scene_gram_schmidt_qr.py GramSchmidtQRScene
+manim -pql linear_algebra/sprint_08_orthogonal_matrices_rotations/scene_orthogonal_matrices_rotations.py OrthogonalRotationsScene
 
-# Production High-Definition Renders (1080p60)
-manim -pqh linear_algebra/sprint_01_vectors_span/scene_vectors_span.py VectorSpanScene
-manim -pqh linear_algebra/sprint_02_linear_mappings/scene_linear_mappings.py LinearMappingsScene
-manim -pqh linear_algebra/sprint_03_column_null_space/scene_column_null_space.py ColumnNullSpaceScene
-manim -pqh linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py ChangeOfBasisScene
+# Production High-Definition Renders (1080p60 Headless)
+manim -qh linear_algebra/sprint_01_vectors_span/scene_vectors_span.py VectorSpanScene
+manim -qh linear_algebra/sprint_02_linear_mappings/scene_linear_mappings.py LinearMappingsScene
+manim -qh linear_algebra/sprint_03_column_null_space/scene_column_null_space.py ColumnNullSpaceScene
+manim -qh linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py ChangeOfBasisScene
+manim -qh linear_algebra/sprint_05_norms_inner_products/scene_norms_inner_products.py NormsInnerProductsScene
+manim -qh linear_algebra/sprint_06_orthogonal_projections/scene_orthogonal_projections.py OrthogonalProjectionsScene
+manim -qh linear_algebra/sprint_07_gram_schmidt_qr/scene_gram_schmidt_qr.py GramSchmidtQRScene
+manim -qh linear_algebra/sprint_08_orthogonal_matrices_rotations/scene_orthogonal_matrices_rotations.py OrthogonalRotationsScene
 ```
 
 ---
@@ -166,14 +283,14 @@ manim -pqh linear_algebra/sprint_04_change_of_basis/scene_change_of_basis.py Cha
 | **02** | **Linear Mappings & Matrix Composition** | Parallel grid invariance, basis columns, $BA \neq AB$ via rotation + shear | MML §2.5, §2.7, VMLS Ch. 6–7, 10, ILA Ch. 6 | **Completed** |
 | **03** | **Column Space, Null Space & Rank-Nullity** | 3D rank-2 collapse onto 2D plane, 1D null line to $\mathbf{0}$, $\mathbf{x}_p + \mathcal{N}(A)$ | MML §2.5–2.7, Kreyszig §7.3–7.5, Grewal Ch. 2 | **Completed** |
 | **04** | **Change of Basis & Similarity ($P^{-1}AP$)** | Standard vs. eigen-grid overlay, $P^{-1} \to D \to P$, defective Jordan collapse | MML §2.7.2, ILA Ch. 6, Kreyszig Ch. 8 | **Completed** |
-| **05** | **Orthogonal Projections & Least Squares** | Orthogonal complements, Gram-Schmidt, normal equations $A^\top(y - A\hat{x}) = 0$ | MML §3.1–3.8, VMLS Ch. 5, 12, ILA Ch. 7 | Planned |
-| **06** | **Determinants & Signed Volume Scaling** | Oriented volume expansion, multilinear alternating forms, orientation reversal | MML §4.1, VMLS Ch. 5, ILA Ch. 6 | Planned |
-| **07** | **Spectral Theory & Quadratic Forms** | Symmetric orthogonal eigen-axes $Q\Lambda Q^\top$, Rayleigh quotient, Hessian curvature | MML §4.2–4.4, Kreyszig Ch. 8, ILA Ch. 8 | Planned |
-| **08** | **Singular Value Decomposition (SVD) & PCA** | Rotation-stretch-rotation hyper-ellipsoid $U\Sigma V^\top$, Eckart-Young, PCA | MML §4.5–4.6, Ch. 10, VMLS Ch. 18 | Planned |
+| **05** | **Norms ($L_1, L_2, L_\infty$) & Cauchy-Schwarz** | Unit ball morphing ($L_1 \to L_2 \to L_\infty$), ruler projection, SPD ellipsoid warping | MML §3.1–3.3, ILA Ch. 3, VMLS Ch. 3–4 | **Completed** |
+| **06** | **Orthogonal Projections onto Lines & Subspaces** | Distance bowl minimization, $P = A(A^\top A)^{-1}A^\top$, Pythagoras split | MML §3.8, ILA Ch. 3, 6, VMLS Ch. 11–12 | **Completed** |
+| **07** | **Gram-Schmidt Orthonormalization & $QR$** | Sequential shadow stripping in 3D, $A = QR$, volume conservation $\prod R_{ii}$ | MML §3.8.3, VMLS Ch. 5.4, 10.4, Kreyszig §20.9 | **Completed** |
+| **08** | **Orthogonal Matrices & Rotations ($SO(n)$)** | Rigid isometries, proper vs improper reflections, Cartan–Dieudonné, RoPE | MML §3.9, ILA Ch. 6, Kreyszig §8.3 | **Completed** |
 
 ---
 
-## 2. Master Study Guide: How to Study Sprints 1–4
+## 2. Master Study Guide: How to Study Sprints 1–8
 
 To achieve 90%+ geometric and analytical mastery across GATE CS/DA and Frontier ML, study each sprint using this **5-Phase Active Loop** rather than passively reading textbooks or watching videos:
 
@@ -187,26 +304,46 @@ To achieve 90%+ geometric and analytical mastery across GATE CS/DA and Frontier 
 ### Phase 2: Targeted Multi-Book Triangulation (35 mins)
 Use the **Canonical Textbook Cross-Reference Matrix** in each sprint's `README.md` to read the exact sections in a deliberate sequence:
 1. **Immersive Linear Algebra (ILA — Interactive Browser)**:
-   - Open `https://immersivemath.com/ila/tableofcontents.html` first. Drag the interactive vector tips in the browser figures to feel the spatial sensitivity before reading formal proofs.
+   - Open `https://immersivemath.com/ila/tableofcontents.html` first. Drag the interactive vector tips in the browser figures to feel the spatial sensitivity before reading formal proofs (Ch. 1–2 for Sprint 1, Ch. 6 for Sprints 2, 4, 8; Ch. 3 for Sprints 5–6; Ch. 7 for Sprint 6–7).
 2. **Boyd & Vandenberghe (`VMLS.pdf`)**:
-   - Read for **applied intuition, block-matrix mechanics, and least-norm/optimization framing** (Ch. 1 & 5 for Sprint 1; Ch. 6, 7, 10 for Sprints 2–3).
+   - Read for **applied intuition, block-matrix mechanics, and least-squares optimization**:
+     - Ch. 1 & 5: Vectors, linear combinations, span (Sprint 1)
+     - Ch. 6–7, 10: Linear functions, matrix multiplication, composition (Sprint 2)
+     - Ch. 10: Column and null space, inverse systems (Sprint 3)
+     - Ch. 6, 10: Coordinate basis changes (Sprint 4)
+     - Ch. 3–4: Norms, distances, inner products, angles, Cauchy-Schwarz (Sprint 5)
+     - Ch. 11–12: Least squares, orthogonal projections, normal equations (Sprint 6)
+     - Ch. 5.4, 10.4, 11.4: Gram-Schmidt orthonormalization, QR factorization (Sprint 7)
+     - Ch. 6: Orthogonal transformations, rotations, reflections (Sprint 8)
 3. **Deisenroth, Faisal & Ong (`Mathematics for Machine Learning.pdf`)**:
-   - Read for **rigorous vector space definitions, basis change commutative diagrams, and ML bridges** (§2.4 for Sprint 1; §2.5–2.6 for Sprint 2–3; §2.7.2 for Sprint 4).
-4. **Kreyszig (Ch. 7–8) & B.S. Grewal (Ch. 2)**:
-   - Read for **theorem statements, rank-nullity edge cases, Cayley-Hamilton shortcuts, and GATE problem archetypes**.
+   - Read for **rigorous definitions, vector space geometry, and Frontier ML connections**:
+     - §2.4: Vector spaces, linear independence, basis (Sprint 1)
+     - §2.5–2.7: Linear mappings, matrix representations (Sprint 2)
+     - §2.5–2.7: Image, kernel, rank-nullity (Sprint 3)
+     - §2.7.2: Basis change commutative diagrams (Sprint 4)
+     - §3.1–3.3: Norms, inner products, lengths, angles, Cauchy-Schwarz (Sprint 5)
+     - §3.8: Orthogonal projections onto lines and general subspaces (Sprint 6)
+     - §3.8.3: Gram-Schmidt orthonormalization (Sprint 7)
+     - §3.9: Orthogonal matrices, rotations, transformations (Sprint 8)
+4. **Kreyszig (10th Ed. Ch. 7–8, 20.9) & B.S. Grewal (Ch. 2)**:
+   - Read for **theorems, rank-nullity proofs, QR numerical methods, and GATE CS/DA PYQ archetypes**.
 
 ### Phase 3: Break the Code via `tweaks_prompts.md` (25 mins)
 Never treat `scene_*.py` as read-only. Open `tweaks_prompts.md` in the sprint folder:
 1. **Execute the Parameter Tweaks**:
-   - Change the matrices/vectors at the top of `scene_*.py` as instructed (e.g., orientation-reversing negative determinants in Sprint 2, rank-1 collapse in Sprint 3, or complex rotation eigenvalues in Sprint 4).
+   - Change the matrices/vectors at the top of `scene_*.py` as instructed (e.g., orientation-reversing negative determinants in Sprint 2, rank-1 collapse in Sprint 3, complex rotation eigenvalues in Sprint 4, $p < 1$ quasi-norm stars in Sprint 5, ill-conditioned Lauchli matrices in Sprint 6 & 7, or 3D non-commutative axes in Sprint 8).
    - **Predict on paper** what the grid, basis vectors, and HUD invariants will look like *before* running `manim -pql`.
 2. **Solve the 4 Intuition Stress-Test Prompts**:
    - Write down your geometric + algebraic answer first, then run the embedded NumPy verification snippet in `tweaks_prompts.md` to check your derivation against exact floating-point output.
 
 ### Phase 4: Read the Test Suite as Executable Theorems (15 mins)
 Open `tests/test_sprint0X_invariants.py` and `tests/test_adversarial_sprintX.py`:
-- Every `test_*` function is a **machine-verified mathematical theorem** (e.g., verifying $A\mathbf{x}_p + A\mathbf{v}_{\text{null}} = \mathbf{b}$ across 100,000 vectors, or verifying $\text{Tr}(P^{-1}AP) = \text{Tr}(A)$).
+- Every `test_*` function is a **machine-verified mathematical theorem** (e.g., verifying $P^2 = P$ and $P^\top = P$ across thousands of random projections, $A^\top A = R^\top R$, or $Q^\top Q = I$).
 - Run `pytest tests/test_sprint0X_invariants.py -v` and read how mathematical invariants translate into `np.allclose` assertions.
+
+### Phase 5: Re-Synthesize into your Obsidian Brain (15 mins)
+- Port the **Geometric Action**, **Geometric Invariants**, and **Dual Bridge (Frontier ML + GATE Shortcut)** directly into your personal Obsidian notes (`~/brain`).
+- Link theorems back to the repository's rendered 1080p60 animations in `linear_algebra/animations/`.
 
 ---
 

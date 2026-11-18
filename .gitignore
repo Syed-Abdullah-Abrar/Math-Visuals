@@ -27,6 +27,8 @@ ENV/
 env/
 
 # Manim intermediate render caches & partial files
+media/
+**/media/
 **/media/Tex/
 **/media/texts/
 **/partial_movie_files/
